@@ -7,8 +7,11 @@
     box-sizing: border-box;
   }
   body {
-    @apply bg-rose-50 text-gray-800 font-sans;
+    font-family: 'Nunito', 'ZCOOL KuaiLe', 'PingFang SC', sans-serif;
     min-height: 100vh;
+    background-color: #fff5f7;
+    background-image: radial-gradient(#fecdd3 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
   }
 }
 
@@ -34,6 +37,32 @@
     break-inside: avoid;
     margin-bottom: 1rem;
   }
+
+  .cute-card {
+    @apply bg-white rounded-3xl shadow-sm border border-pink-50 overflow-hidden transition-all duration-300;
+    box-shadow: 0 4px 20px -4px rgba(251, 113, 133, 0.12);
+  }
+
+  .cute-card:hover {
+    box-shadow: 0 8px 30px -4px rgba(251, 113, 133, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .cute-btn-primary {
+    @apply bg-gradient-to-r from-rose-400 to-pink-400 text-white font-bold rounded-2xl px-6 py-2.5 text-sm transition-all duration-200 shadow-sm;
+    box-shadow: 0 4px 12px rgba(251, 113, 133, 0.35);
+  }
+  .cute-btn-primary:hover {
+    box-shadow: 0 6px 16px rgba(251, 113, 133, 0.45);
+    transform: translateY(-1px);
+  }
+  .cute-btn-primary:active {
+    transform: scale(0.97);
+  }
+
+  .tag-pill {
+    @apply text-xs font-semibold px-2.5 py-0.5 rounded-full border;
+  }
 }
 
 /* Custom scrollbar */
@@ -51,19 +80,70 @@
   background: #fb7185;
 }
 
-/* Timeline line animation */
+/* Animations */
 .timeline-item {
   opacity: 0;
   animation: slideUp 0.4s ease-out forwards;
 }
 
 @keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-8px) rotate(3deg); }
+  66%       { transform: translateY(-4px) rotate(-2deg); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.2); }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14%       { transform: scale(1.15); }
+  28%       { transform: scale(1); }
+  42%       { transform: scale(1.1); }
+  56%       { transform: scale(1); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25%       { transform: rotate(-6deg); }
+  75%       { transform: rotate(6deg); }
+}
+
+.animate-float    { animation: float    3s ease-in-out infinite; }
+.animate-sparkle  { animation: sparkle  2s ease-in-out infinite; }
+.animate-heartbeat{ animation: heartbeat 2s ease-in-out infinite; }
+.animate-wiggle   { animation: wiggle   0.5s ease-in-out; }
+
+/* Add button pulse ring */
+.add-btn-ring {
+  position: relative;
+}
+.add-btn-ring::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #fda4af, #c4b5fd, #fda4af);
+  background-size: 200% 200%;
+  animation: gradientMove 3s ease infinite;
+  z-index: -1;
+  opacity: 0.6;
+}
+
+@keyframes gradientMove {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Fancy input focus */
+input:focus, textarea:focus, select:focus {
+  outline: none;
 }
